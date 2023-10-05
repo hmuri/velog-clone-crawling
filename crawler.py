@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import json
 
 def crawl_velog():
     try:
@@ -44,7 +43,6 @@ def crawl_velog():
             "error": str(e)
         }
 
-    with open("data.json", "w", encoding="utf-8") as file:
-        json.dump(result, file, ensure_ascii=False, indent=4)
+    return result
 
-crawl_velog()
+

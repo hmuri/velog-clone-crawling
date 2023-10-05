@@ -3,10 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:description" content="velog 클론 코딩" />
-    <title>바리바리</title>
+    <title>velog</title>
     <script>
       let postData;
       window.onload = function () {
@@ -15,18 +14,22 @@
           .then((data) => {
             if (data.success) {
               postData = data.data;
+              console.log(postData);
             } else {
               alert("Error: " + data.error);
+              console.log(data.error);
             }
           })
           .catch((error) => {
             alert("Request failed: " + error.message);
+            console.log(data.error);
           });
       };
     </script>
   </head>
   <body>
     <div id="root"></div>
+    <nav></nav>
     <script src="script.js"></script>
   </body>
 </html>
