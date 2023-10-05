@@ -1,0 +1,40 @@
+body {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  background-color: #efefef;
+  color: #333;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+  height: 50px;
+  padding: 20px 10%;
+}
+
+nav ul {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: flex;
+}
+
+/* 네비게이션 바 링크 스타일 */
+nav a {
+  text-decoration: none;
+  color: #333;
+}
+
+/* 링크에 호버(마우스 오버) 효과 스타일 */
+nav a:hover {
+  text-decoration: underline; /* 호버 시 밑줄 표시 */
+}
