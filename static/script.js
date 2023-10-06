@@ -17,6 +17,7 @@ function changeColor(selectedItem) {
 }
 
 function fetchData(endpoint) {
+  changeColor(selectedItem);
   fetch(endpoint)
     .then((response) => response.json())
     .then((data) => {

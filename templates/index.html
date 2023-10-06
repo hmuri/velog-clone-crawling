@@ -41,11 +41,14 @@
     </nav>
     <nav>
       <ul>
-        <li class="select-order selected" onclick="fetchData('/run-script')">
+        <li
+          class="select-order selected"
+          onclick="fetchData('/run-script', this)"
+        >
           <a href="#">트렌딩</a>
         </li>
-        <li class="select-order" onclick="fetchData('/recent')">
-          <a href="/recent">최신</a>
+        <li class="select-order" onclick="fetchData('/run-recent', this)">
+          <a href="/#">최신</a>
         </li>
       </ul>
     </nav>

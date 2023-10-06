@@ -18,7 +18,7 @@ def run_script():
     result = crawler.crawl_velog('https://velog.io/')
     return jsonify(result)
 
-@app.route("/recent")
+@app.route("/run-recent")
 def run_recent():
     result = crawler.crawl_velog('https://velog.io/recent')
     return jsonify(result)
