@@ -40,7 +40,7 @@ nav a:hover {
 
 .new-posting {
   border: solid 1px #333;
-  border-radius: 2%;
+  border-radius: 1rem;
   padding: 5px 8px;
   text-decoration: none;
 }

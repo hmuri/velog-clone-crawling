@@ -8,6 +8,7 @@ function changeTheme() {
 }
 
 function changeColor(selectedItem) {
+  console.log(selectedItem);
   // 모든 항목에서 "selected" 클래스 제거
   const items = document.querySelectorAll(".select-order");
   items.forEach((item) => item.classList.remove("selected"));
@@ -16,7 +17,8 @@ function changeColor(selectedItem) {
   selectedItem.classList.add("selected");
 }
 
-function fetchData(endpoint) {
+function fetchData(endpoint, selectedItem) {
+  console.log("fetch" + selectedItem);
   changeColor(selectedItem);
   fetch(endpoint)
     .then((response) => response.json())
@@ -61,5 +63,7 @@ function displayPosts(postData) {
 
 // 페이지 로드 시 트렌딩 데이터 기본값
 window.onload = function () {
-  fetchData("/run-script");
+  const trendingItem = document.querySelector(".select-order.selected");
+  fetchData("/run-script", trendingItem);
+  //머리 어지러워서 여기서만 인자 전달 안해줘서 undefined 난 거 계속 놓치고 헤매고 있엇음...
 };
