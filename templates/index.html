@@ -11,77 +11,47 @@
     <!--플라스크 쓸 때는 아래처럼 css파일 가져와야 함. ... 왜 플라스크 쓰겠다고... 그랬을까...-->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta property="og:description" content="velog 클론 코딩" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+
     <title>velog</title>
   </head>
   <body>
     <div id="root"></div>
     <nav>
       <ul>
-        <li style="width: calc(80% - 240px); float: left">
-          <a href="#">velog</a>
+        <li style="width: calc(80% - 240px); float: left; font-size: 20px">
+          <a href="#"><h2>velog</h2></a>
         </li>
-        <li style="width: 50px"><a href="#">테마</a></li>
-        <li style="width: 50px"><a href="#">검색</a></li>
-        <li style="width: 80px"><a href="#">새 글 작성</a></li>
+        <li style="width: 40px">
+          <a href="#" onclick="changeTheme()"><i class="fas fa-sun"></i></a>
+        </li>
+
+        <li style="width: 40px">
+          <a href="#"><i class="fas fa-search"></i></a>
+        </li>
+
+        <li style="width: 100px">
+          <a href="#"><btn class="new-posting">새 글 작성</btn></a>
+        </li>
         <li style="width: 60px"><a href="#">프로필</a></li>
       </ul>
     </nav>
     <nav>
       <ul>
-        <li style="width: calc(80% - 240px); float: left">
-          <a href="#">velog</a>
+        <li class="select-order selected" onclick="fetchData('/run-script')">
+          <a href="#">트렌딩</a>
         </li>
-        <li style="width: 50px"><a href="#">트렌딩</a></li>
-        <li style="width: 50px"><a href="#">최신</a></li>
-        <li style="width: 80px"><a href="#">이번주</a></li>
-        <li style="width: 60px"><a href="#">점</a></li>
+        <li class="select-order" onclick="fetchData('/recent')">
+          <a href="/recent">최신</a>
+        </li>
       </ul>
     </nav>
     <div class="posting-container"></div>
 
-    <script src="script.js"></script>
-    <script>
-      let postData;
-      window.onload = function () {
-        fetch("/run-script")
-          .then((response) => response.json())
-          .then((data) => {
-            if (data.success) {
-              postData = data.data;
-              console.log(postData);
-
-              const container = document.querySelector(".posting-container"); // 이 위치에 포스트 카드들을 추가합니다. 와우, posting-card는 클래스라서 앞에 점을 붙여줘야 한대요
-              //궁금증 : 이게 서버사이드 렌더링(서버에서 html 만들어서 클라이언트에 전달하는 개념)이라서 이렇게 html로 map 돌려서 html 텍스트 자체를 다 만들어놓고 한번에 렌더링 시키는 게 더 나은 게 맞는 건가? 보통 리액트 사용할 때는 클라이언트 측에서 맵 돌리면서 한 컴포넌트 씩 화면에 만들어내는 거고...? 그래서 csr이 로딩 걸리면서 하나씩 천천히 생겨나고, ssr은 한 번에 빵 하고 나타나고...?
-              postData.forEach((post) => {
-                const cardHTML = `
-                <div class="posting-card">
- 
-                      <a href="${post["post_url"]}" class="post-url">
-                          <img src="${post["thumbnail_url"]}" alt="썸네일" class="thumbnail-url" />
-                      </a>
-                      <h4 class="title">${post["title"]}</h4>
-                      <div class="description-wrapper">
-                          <p class="description">${post["description"]}</p>
-                      </div>
-                      <div class="sub-info">
-                          <span class="date">${post["date"]}</span>
-                          <span>|</span>
-                          <span class="comment-count">댓글: ${post["comment_count"]}개</span>
-                      </div>
-                      <a href="#" class="userinfo">
-                          <img src="${post["author_profile_url"]}" alt="작성자 프로필" class="author-profile-url" />
-                          <b class="author-name">${post["author_name"]}</b>
-                      </a>
-                      <div class="likes">${post["likes"]} 좋아요</div>
-                    </div>
-              `;
-
-                container.insertAdjacentHTML("beforeend", cardHTML);
-              });
-            }
-          });
-      };
-    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
     <!--스크립트 위치도 중요함. 왜냐면 먼저 html 생성되고 그 안에 스크립트 요소들 넣어줘야 되는데 스크립트 먼저 실행시키면 queryselector가 못 찾아서 null 값으로 인식할 수도 있음-->
   </body>
 </html>
