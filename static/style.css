@@ -1,3 +1,4 @@
+/*아놔 플라스크 할 때는 캐시를 지우자. ㄹㅇ 스타일 계속 수정이 안돼서 잘못한 줄 알고 난리 쳤는데 캐시 안지워져서 그런 거였다*/
 body {
   display: flex;
   flex-direction: column;
@@ -39,25 +40,35 @@ nav a:hover {
 
 .posting-container {
   display: flex;
-  flex-direction: row;
+  width: 90%;
+  margin: 0 5%;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .posting-card {
-  display: flex;
+  display: block; /*너무 display: flex로 다 때려박아놓고 나중에 맞추는 경향이 있는데 다른 display 들도 써보자*/
   border: 1px solid #e5e5e5;
+  max-width: 250px;
   padding: 10px;
-  max-width: 300px;
   flex-basis: calc(33.333% - 20px);
   margin: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+@media (max-width: 768px) {
+  .posting-card {
+    min-width: 80% !important; /*min-width랑 width 작동이 사뭇 다름. 적절하게 쓰기*/
+  }
+}
+
 .thumbnail-url {
-  max-width: 100%;
-  height: auto;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 200px;
+  object-fit: cover; /*background-size랑 비슷한데 img 태그에서 쓰는 거! 기억하기*/
   border-radius: 5px;
 }
 
@@ -67,14 +78,28 @@ nav a:hover {
 }
 
 .description-wrapper .description {
-  margin-top: 10px;
-  color: #777;
+  margin: 0px 0px 1.5rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  height: 3.9375rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text2);
 }
+/*word-break: break-word; 및 overflow-wrap: break-word;: 긴 단어나 URL과 같은 텍스트 요소에서 줄 바꿈을 가능하게 합니다. 긴 단어가 화면에 맞지 않을 때 자동으로 줄 바꿈하도록 합니다.*/
+/*display: -webkit-box;, -webkit-line-clamp: 3;, -webkit-box-orient: vertical;: 웹킷(WebKit) 엔진을 사용하는 브라우저에서 다중 라인 텍스트를 표시하고 줄 수를 제한하는 데 사용됩니다. -webkit-line-clamp는 표시할 줄 수를 지정하며, -webkit-box-orient는 텍스트의 방향을 수직(vertical)으로 설정합니다.*/
+/*text-overflow: ellipsis;: 텍스트가 요소의 너비를 초과하는 경우, 텍스트가 생략 부호(ellipsis, ...)로 표시되도록 합니다.*/
 
 .sub-info {
   margin-top: 10px;
   display: flex;
   align-items: center;
+
   gap: 5px;
 }
 
