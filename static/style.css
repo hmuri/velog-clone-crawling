@@ -37,11 +37,20 @@ nav a:hover {
   text-decoration: underline;
 }
 
+.posting-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .posting-card {
+  display: flex;
   border: 1px solid #e5e5e5;
   padding: 10px;
-  max-width: 400px;
-  margin: 20px;
+  max-width: 300px;
+  flex-basis: calc(33.333% - 20px);
+  margin: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
