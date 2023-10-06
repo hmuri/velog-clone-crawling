@@ -1,9 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
-def crawl_velog():
+def crawl_velog(url):
     try:
-        url = 'https://velog.io/'
         response = requests.get(url)
         response.raise_for_status()
 

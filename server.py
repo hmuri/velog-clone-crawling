@@ -15,8 +15,21 @@ def index():
 
 @app.route("/run-script")
 def run_script():
-    result = crawler.crawl_velog()
+    result = crawler.crawl_velog('https://velog.io/')
     return jsonify(result)
+
+@app.route("/recent")
+def run_recent():
+    result = crawler.crawl_velog('https://velog.io/recent')
+    return jsonify(result)
+
+
+
+#이렇게.. 캐시를 지워줍시다...
+@app.after_request
+def add_header(response):
+    response.cache_control.no_cache = True
+    return response
 
 if __name__ == "__main__":
    app.run(debug=True)
