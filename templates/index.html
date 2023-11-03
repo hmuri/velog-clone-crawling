@@ -64,7 +64,48 @@
       </ul>
     </nav>
     <div class="posting-container"></div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const postData = localStorage.getItem("postData");
+        console.log(postData);
 
+        if (postData) {
+          const container = document.querySelector(".posting-container");
+          const data = JSON.parse(postData); // JSON 문자열을 객체로 변환
+          const cardHTML = `
+            <div class="posting-card">
+                <a href="#" target="_blank" class="post-url">
+                    <img src="${data.image_url}" alt="Thumbnail for ${
+            data.title
+          }" class="thumbnail-url" />
+                </a>
+                <h4 class="title">${data.title}</h4>
+                <div class="description-wrapper">
+                    <p class="description">${data.description || ""}</p>
+                </div>
+                <div class="sub-info">
+                    <span class="date">${data.date}</span>
+                    <span>|</span>
+                    <span class="comment-count">댓글: ${
+                      data.comment_count || "0"
+                    }개</span>
+                </div>
+                <a href="#" class="userinfo">
+                    <img src="${
+                      data.user_profile_url || "#"
+                    }" alt="Profile of ${
+            data.username
+          }" class="author-profile-url" />
+                    <b class="author-name">${data.username}</b>
+                </a>
+                <div class="likes">${data.like_count || "0"} 좋아요</div>
+            </div>
+          `;
+
+          container.insertAdjacentHTML("beforeend", cardHTML);
+        }
+      });
+    </script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
     <!--스크립트 위치도 중요함. 왜냐면 먼저 html 생성되고 그 안에 스크립트 요소들 넣어줘야 되는데 스크립트 먼저 실행시키면 queryselector가 못 찾아서 null 값으로 인식할 수도 있음-->
   </body>

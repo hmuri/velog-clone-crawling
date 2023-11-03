@@ -57,7 +57,7 @@ function displayPosts(postData) {
             </div>
         `;
 
-    container.insertAdjacentHTML("beforeend", cardHTML);
+    //container.insertAdjacentHTML("beforeend", cardHTML);
   });
 }
 
@@ -84,11 +84,14 @@ function selectOption(text) {
 }
 
 // 페이지 로드 시 트렌딩 데이터 기본값
-window.onload = function () {
-  const trendingItem = document.querySelector(".select-order.selected");
-  fetchData("/run-script", trendingItem);
-  //머리 어지러워서 여기서만 인자 전달 안해줘서 undefined 난 거 계속 놓치고 헤매고 있엇음...
-};
+// window.onload = function () {
+//   const trendingItem = document.querySelector(".select-order.selected");
+//   fetchData("/run-script", trendingItem);
+//   //머리 어지러워서 여기서만 인자 전달 안해줘서 undefined 난 거 계속 놓치고 헤매고 있엇음...
+// };
+
+//와 ㄹㅈㄷ 바보 여기서 계속 트렌딩 데이터 기본값 불러와서 계속 html 재 로딩되고 내가 만들어놓은 거 사라지는 거였는데 이걸 몰라서... 밤을 샜네......
+//log 확인을 잘하자...
 
 // write.html
 const tagInput = document.getElementById("tagInput");
@@ -126,4 +129,41 @@ function createTag(value) {
     this.remove();
   });
   tagsList.appendChild(tag);
+}
+
+function submitURL() {
+  const url = document.getElementById("urlInput").value;
+  localStorage.clear();
+
+  fetch("/process-url", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ url: url }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // 로컬 스토리지에 정보 저장
+      console.log(JSON.stringify(data));
+      localStorage.setItem("postData", JSON.stringify(data));
+      console.log(localStorage.getItem("postData"));
+
+      // index.html 페이지로 리다이렉트
+      window.location.href = "/";
+    })
+    .catch((error) => {
+      console.error(
+        "There was a problem with the fetch operation:",
+        error.message
+      );
+    });
+}
+
+function redirectToFlaskEndpoint() {
+  fetch("/redirect-to-index").then((response) => {
+    if (response.redirected) {
+      window.location.href = response.url;
+    }
+  });
 }
