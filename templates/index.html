@@ -36,7 +36,7 @@
         </li>
 
         <li style="width: 100px">
-          <a href="#"><btn class="new-posting">새 글 작성</btn></a>
+          <a href="/write"><btn class="new-posting">새 글 작성</btn></a>
         </li>
         <li style="width: 60px"><a href="#">프로필</a></li>
       </ul>
@@ -51,6 +51,15 @@
         </li>
         <li class="select-order" onclick="fetchData('/run-recent', this)">
           <a href="/#">최신</a>
+        </li>
+        <li class="dropdown">
+          <button onclick="toggleDropdown()">오늘</button>
+          <div class="dropdown-content" id="dropdownMenu">
+            <a href="#" onclick="selectOption('오늘')">오늘</a>
+            <a href="#" onclick="selectOption('이번주')">이번주</a>
+            <a href="#" onclick="selectOption('이번달')">이번달</a>
+            <a href="#" onclick="selectOption('올해')">올해</a>
+          </div>
         </li>
       </ul>
     </nav>

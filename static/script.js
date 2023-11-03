@@ -61,9 +61,33 @@ function displayPosts(postData) {
   });
 }
 
+function toggleDropdown() {
+  const dropdown = document.getElementById("dropdownMenu");
+  dropdown.style.display =
+    dropdown.style.display === "block" ? "none" : "block";
+}
+
+function selectOption(text) {
+  const dropdownButton = document.querySelector(".dropdown > button");
+  dropdownButton.textContent = text;
+
+  const dropdownOptions = document.querySelectorAll(".dropdown-content a");
+  dropdownOptions.forEach((opt) => {
+    if (opt.textContent === text) {
+      opt.classList.add("selected");
+    } else {
+      opt.classList.remove("selected");
+    }
+  });
+
+  toggleDropdown();
+}
+
 // 페이지 로드 시 트렌딩 데이터 기본값
 window.onload = function () {
   const trendingItem = document.querySelector(".select-order.selected");
   fetchData("/run-script", trendingItem);
   //머리 어지러워서 여기서만 인자 전달 안해줘서 undefined 난 거 계속 놓치고 헤매고 있엇음...
 };
+
+// write.html
