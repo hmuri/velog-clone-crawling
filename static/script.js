@@ -91,3 +91,39 @@ window.onload = function () {
 };
 
 // write.html
+const tagInput = document.getElementById("tagInput");
+const tagsList = document.querySelector(".tags-list");
+
+tagInput.addEventListener("keyup", function (event) {
+  if (event.key === "Enter" && this.value.trim() !== "") {
+    const tagValue = this.value.trim().toLowerCase(); // 중복 체크를 쉽게 하기 위해 소문자로 변환
+    if (!checkDuplicate(tagValue)) {
+      createTag(tagValue);
+      this.value = "";
+    } else {
+      alert("중복된 태그입니다!");
+      this.value = "";
+    }
+  }
+});
+
+function checkDuplicate(value) {
+  const tags = document.querySelectorAll(".tag");
+  for (let tag of tags) {
+    if (tag.textContent.toLowerCase() === value) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function createTag(value) {
+  const tag = document.createElement("div");
+  const tagText = document.createTextNode(value);
+  tag.appendChild(tagText);
+  tag.classList.add("tag");
+  tag.addEventListener("click", function () {
+    this.remove();
+  });
+  tagsList.appendChild(tag);
+}

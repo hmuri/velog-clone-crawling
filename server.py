@@ -13,6 +13,10 @@ def index():
 #templates에 넣을 거면 그냥 open.read 하면 안되고 render_template 해야 함.
 #거기에 안 넣고 그냥 밖에 있는 거 하려면 걍 open.read 해도 됨. 근데 그러면 또 css 문제가 생기니 지금처럼 하자^~^
 
+@app.route("/write") #얘 주소로 가면 index.html 나오는 거
+def write():
+    return render_template('write.html')
+
 @app.route("/run-script")
 def run_script():
     result = crawler.crawl_velog('https://velog.io/')

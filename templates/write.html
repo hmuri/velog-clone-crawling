@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <title>Write</title>
+  </head>
+
+  <body>
+    <div class="write-container">
+      <h2>새 글 작성</h2>
+      <div class="tags-input">
+        <input type="text" id="tagInput" placeholder="태그를 입력해주세요." />
+      </div>
+      <div class="tags-list"></div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
